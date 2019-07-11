@@ -4,12 +4,12 @@
 #### 已实现功能
 - 自动添加swagger2注解到实体类
 - 扩展set方法,返回this实例;方便链式调用
+- 支持`Date` 类型的字段添加 `@JsonFormat` 注解
 
 
 
 #### maven引用
 ```xml
-<!-- https://mvnrepository.com/artifact/com.github.misterchangray.mybatis.generator.plugins/myBatisGeneratorPlugins -->
 <dependency>
     <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
     <artifactId>myBatisGeneratorPlugins</artifactId>
@@ -36,7 +36,14 @@
         <!-- 扩展entity的set方法-->
         <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
 ```
-
+#### 3. `Date` 类型的字段添加 `@JsonFormat` 注解
+扩展entity的`set`方法；返回当前`this`实例，方便链式调用
+``` xml
+<plugin type="mybatis.generator.plugins.JacksonDateFormatAnnotation">
+    <property name="jacksonDateFormat.enable" value="true"/>
+    <property name="jacksonDateFormat.format" value="yyyy-MM-dd'T'HH:mm:ss.SSSZ"/>
+</plugin>
+```
 
 -------------------------------------------------
 
@@ -50,7 +57,6 @@ add dependency to your pom.xml on mybatis node. like:
     <finalName>common-core</finalName>
     <!--  ...  -->
     <plugins>
-      <!--mybatis 逆向工程插件-->
       <plugin>
         <groupId>org.mybatis.generator</groupId>
         <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -61,13 +67,11 @@ add dependency to your pom.xml on mybatis node. like:
         </configuration>
         <dependencies>
           <!--  use plugin  -->
-          <!-- https://mvnrepository.com/artifact/com.github.misterchangray.mybatis.generator.plugins/myBatisGeneratorPlugins -->
           <dependency>
               <groupId>com.github.misterchangray.mybatis.generator.plugins</groupId>
               <artifactId>myBatisGeneratorPlugins</artifactId>
               <version>1.2</version>
           </dependency>
-  
         </dependencies>
       </plugin>
     </plugins>
