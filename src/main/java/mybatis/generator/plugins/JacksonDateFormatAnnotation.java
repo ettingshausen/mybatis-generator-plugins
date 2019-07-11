@@ -30,7 +30,6 @@ public class JacksonDateFormatAnnotation extends PluginAdapter {
         if (StringUtility.isTrue(enable)) {
             String annotation = String.format("@JsonFormat( pattern=\"%s\",timezone = \"GMT+8\")", format);
             FullyQualifiedJavaType fullyQualifiedJavaType = field.getType();
-            System.out.println(fullyQualifiedJavaType.getShortNameWithoutTypeArguments());
             if (DATE_TYPE.equals(fullyQualifiedJavaType.getShortNameWithoutTypeArguments())){
                 topLevelClass.addImportedType("com.fasterxml.jackson.annotation.JsonFormat");
                 field.addAnnotation(annotation);
